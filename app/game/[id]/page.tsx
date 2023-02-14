@@ -3,14 +3,14 @@
 import GameNotFound from '@/components/GameNotFound'
 import Loading from '@/components/Loading'
 import { fetchGameById, fetchGameScreenshotsById, fetchGameTrailersById } from '@/models/controller'
-import { Game } from '@/models/models'
+import { Game, Screenshots, Trailer } from '@/models/models'
 import React, { useEffect, useState } from 'react'
 
 const GameDetailsPage = ({ params }: any) => {
     const id = params.id
     const [game, setGame] = useState<Game | null>(null)
-    const [gameSS, setGameSS] = useState<Array<any> | null>(null)
-    const [gameTrailers, setGameTrailers] = useState<Array<any> | null>(null)
+    const [gameSS, setGameSS] = useState<Array<Screenshots> | null>(null)
+    const [gameTrailers, setGameTrailers] = useState<Array<Trailer> | null>(null)
     const getGame = async (id: string) => {
         const gameDetails = await fetchGameById(id)
         setGame(gameDetails)
@@ -101,11 +101,11 @@ const GameDetailsPage = ({ params }: any) => {
                         <ul>
                             <li><button className={aboutActive ? 'active' : ''} onClick={() => handleTabClick(TABS.ABOUT)}>About</button></li>
                             {
-                                (gameSS?.length > 0) &&
+                                (gameSS?.length ?? 0) > 0 &&
                                 <li><button className={ssActive ? 'active' : ''} onClick={() => handleTabClick(TABS.SCREESHOTS)}>Screenshots</button></li>}
 
                             {
-                                (gameTrailers?.length > 0) &&
+                                (gameTrailers?.length ?? 0) > 0 &&
                                 < li > <button className={trailersActive ? 'active' : ''} onClick={() => handleTabClick(TABS.TRAILERS)}>Trailers</button></li>
                             }
                         </ul>
