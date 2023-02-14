@@ -40,9 +40,6 @@ const GameDetailsPage = ({ params }: any) => {
     const getTrailers = async (id: string) => {
         const gameTrailerList = await fetchGameTrailersById(id)
         setGameTrailers(gameTrailerList.results)
-        console.log(gameTrailers)
-        console.log(game?.trailers)
-
     }
 
     useEffect(() => {
@@ -103,8 +100,14 @@ const GameDetailsPage = ({ params }: any) => {
                         <nav>
                             <ul>
                                 <li><button className={aboutActive ? 'active' : ''} onClick={() => handleTabClick(TABS.ABOUT)}>About</button></li>
-                                <li><button className={ssActive ? 'active' : ''} onClick={() => handleTabClick(TABS.SCREESHOTS)}>Screenshots</button></li>
-                                <li><button className={trailersActive ? 'active' : ''} onClick={() => handleTabClick(TABS.TRAILERS)}>Trailers</button></li>
+                                {
+                                    gameSS &&
+                                    <li><button className={ssActive ? 'active' : ''} onClick={() => handleTabClick(TABS.SCREESHOTS)}>Screenshots</button></li>
+                                }
+                                {
+                                    gameTrailers &&
+                                    <li><button className={trailersActive ? 'active' : ''} onClick={() => handleTabClick(TABS.TRAILERS)}>Trailers</button></li>
+                                }
                             </ul>
                         </nav>
                         {
@@ -177,8 +180,6 @@ const GameDetailsPage = ({ params }: any) => {
                                             </video>
                                     )
                                 }
-
-
                             </div>
                         }
                     </div>

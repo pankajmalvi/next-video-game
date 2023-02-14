@@ -45,9 +45,6 @@ export const fetchGameScreenshotsById = async (id: string) => {
 };
 
 export const fetchGameTrailersById = async (id: string) => {
-  console.log(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}/movies?key=${process.env.NEXT_PUBLIC_API_KEY}`,
-  );
   return await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}/movies?key=${process.env.NEXT_PUBLIC_API_KEY}`,
     options,
