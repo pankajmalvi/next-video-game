@@ -14,7 +14,6 @@ import { useEffect, useState } from "react"
 
 const HomePage = () => {
     const { game, setGame } = useGame()
-    // const { game, setGame } = useGameList()
 
     const [currentPage, setCurrentPage] = useState(1)
     const getGamesList = async () => {

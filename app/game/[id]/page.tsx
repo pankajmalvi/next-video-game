@@ -1,13 +1,14 @@
 'use client'
 
-import { fetchGameById } from '@/models/controller'
+import { fetchGameById, fetchGameScreenshotsById, fetchGameTrailersById } from '@/models/controller'
 import { Game } from '@/models/models'
 import React, { useEffect, useState } from 'react'
 
 const GameDetailsPage = ({ params }: any) => {
     const id = params.id
     const [game, setGame] = useState<Game | null>(null)
-
+    const [gameSS, setGameSS] = useState<Array<any> | null>(null)
+    const [gameTrailers, setGameTrailers] = useState<Array<any> | null>(null)
     const getGame = async (id: string) => {
         const gameDetails = await fetchGameById(id)
         setGame(gameDetails)
@@ -31,9 +32,23 @@ const GameDetailsPage = ({ params }: any) => {
     const [ssActive, setSsActive] = useState(false)
     const [trailersActive, setTrailersActive] = useState(false)
 
+    const getScreenshots = async (id: string) => {
+        const gameScreenShot = await fetchGameScreenshotsById(id)
+        setGameSS(gameScreenShot.results)
+    }
+
+    const getTrailers = async (id: string) => {
+        const gameTrailerList = await fetchGameTrailersById(id)
+        setGameTrailers(gameTrailerList.results)
+        console.log(gameTrailers)
+        console.log(game?.trailers)
+
+    }
 
     useEffect(() => {
         getGame(id)
+        getScreenshots(id)
+        getTrailers(id)
     }, [])
 
     const handleTabClick = (btnType: TABS) => {
@@ -142,13 +157,28 @@ const GameDetailsPage = ({ params }: any) => {
                         {
                             ssActive &&
                             <div className="screenshots-tab">
-                                Screenshots
+                                {
+                                    gameSS?.map((screenshots) =>
+
+                                        <img key={screenshots?.image} src={screenshots?.image} alt={screenshots?.image} />
+
+                                    )
+                                }
                             </div>
                         }
                         {
                             trailersActive &&
                             <div className="trailers-tab">
-                                Trailers
+                                {
+                                    gameTrailers?.map(
+                                        (trailer) =>
+                                            <video key={trailer?.data?.max} controls >
+                                                <source src={trailer?.data?.max} type="video/mp4" />
+                                            </video>
+                                    )
+                                }
+
+
                             </div>
                         }
                     </div>

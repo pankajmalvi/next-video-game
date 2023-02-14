@@ -12,6 +12,10 @@ $border-container: 2px solid $color-primary;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  @media (prefers-color-scheme: dark) {
+    $color-primary: #fff;
+    $color-secondary: #000;
+  }
 }
 
 img {
@@ -193,8 +197,11 @@ main {
           }
         }
         img {
+          @media (prefers-color-scheme: dark) {
+            filter: invert(0);
+          }
           filter: invert(1);
-          width: 25px;
+          height: 25px;
         }
       }
     }
@@ -346,13 +353,18 @@ main {
             padding: 0.5rem;
             gap: 1rem;
             ul {
+              gap: 0.5rem;
               display: flex;
               li {
+                @media (prefers-color-scheme: dark) {
+                  filter: invert(0);
+                }
                 width: 1rem;
-                aspect-ratio: 1/1;
                 filter: invert(1);
-                gap: 1rem;
-                display: flex;
+                img {
+                  height: 25px;
+                  aspect-ratio: 1/1;
+                }
               }
             }
           }
@@ -374,6 +386,9 @@ main {
         }
 
         .trailers-tab {
+          video {
+            width: 100%;
+          }
         }
       }
     }

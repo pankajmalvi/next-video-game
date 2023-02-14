@@ -31,11 +31,25 @@ export const sortAndFetchGamesBy = async (sortBy: string) => {
 };
 
 export const fetchGameById = async (id: string) => {
-  console.log(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}?key=${process.env.NEXT_PUBLIC_API_KEY}`,
-  );
   return await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}?key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    options,
+  ).then((response) => response.json());
+};
+
+export const fetchGameScreenshotsById = async (id: string) => {
+  return await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}/screenshots?key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    options,
+  ).then((response) => response.json());
+};
+
+export const fetchGameTrailersById = async (id: string) => {
+  console.log(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}/movies?key=${process.env.NEXT_PUBLIC_API_KEY}`,
+  );
+  return await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/games/${id}/movies?key=${process.env.NEXT_PUBLIC_API_KEY}`,
     options,
   ).then((response) => response.json());
 };
