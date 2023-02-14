@@ -86,7 +86,6 @@ main {
   flex: 1;
   display: grid;
   place-content: center;
-
   h1 {
     &::after {
       content: ".";
@@ -95,6 +94,18 @@ main {
   }
 }
 
+.game-details-page {
+  .loading {
+    height: 60vh;
+  }
+  .game-not-found {
+    height: 60vh;
+    flex: 1;
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
+}
 // Navbar styles
 .navbar {
   display: flex;
